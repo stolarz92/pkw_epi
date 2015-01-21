@@ -11,20 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150118142045) do
+ActiveRecord::Schema.define(version: 20150121181457) do
 
   create_table "committees", force: true do |t|
     t.string   "name"
-    t.integer  "voivodeship_id"
     t.string   "logo"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "committees_constituencies", force: true do |t|
-    t.integer  "committee_id"
-    t.integer  "constituency_id"
-    t.integer  "number_of_votes"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -54,6 +45,14 @@ ActiveRecord::Schema.define(version: 20150118142045) do
   create_table "voivodeships", force: true do |t|
     t.string   "name"
     t.integer  "places_regional_council"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "votes", force: true do |t|
+    t.integer  "committee_id"
+    t.integer  "constituency_id"
+    t.integer  "number_of_votes"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

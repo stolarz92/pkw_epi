@@ -1,7 +1,5 @@
 class Committee < ActiveRecord::Base
-  has_many :committees_constituencies, :dependent => :destroy
-  has_many :constituencies, :through => :committees_constituencies
-
-  has_many :committees_voivodeships, :dependent => :destroy
-  has_many :voivodeships, :through => :committees_voivodeships
+  has_many :votes
+  has_many :constituencies, :through => :voivodeships
+  has_and_belongs_to_many :voivodeships
 end

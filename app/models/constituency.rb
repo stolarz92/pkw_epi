@@ -1,6 +1,5 @@
 class Constituency < ActiveRecord::Base
-  has_many :committees_constituencies, :dependent => :destroy
-  has_many :committees, :through => :committees_constituencies
+  has_many :votes
 
   belongs_to :voivodeship
 end

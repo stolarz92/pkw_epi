@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  voivodeship_id: 1
+  committee_id: 1
+  is_chosen: 1
+
+two:
+  voivodeship_id: 1
+  committee_id: 1
+  is_chosen: 1
