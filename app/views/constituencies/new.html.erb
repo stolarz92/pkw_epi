@@ -1,2 +1,23 @@
-<h1>Constituencies#new</h1>
-<p>Find me in app/views/constituencies/new.html.erb</p>
+<h1><%= @page_title %></h1>
+
+<div class = "container">
+  <%= form_for @constituency do |f| %>
+      <div class="form-group">
+        <%= f.label :Nazwa_okręgu %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :Województwo %>
+        <%= f.select :voivodeship_id,
+            Voivodeship.all.collect { |x| [x.name, x.id]},
+            {:include_blank => 'Wybierz województwo'},
+            class:'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :Ilość_uprawnionych_do_głosowania %>
+        <%= f.text_field :number_of_voters, class:'form-control' %>
+      </div>
+
+      <%= f.submit "Zapisz", class:'btn btn-primary' %>
+  <% end %>
+</div>

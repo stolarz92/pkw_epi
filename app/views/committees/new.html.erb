@@ -1,2 +1,15 @@
-<h1>Committees#new</h1>
-<p>Find me in app/views/committees/new.html.erb</p>
+<h1><%= @page_title %></h1>
+
+<div class = "container">
+  <%= form_for @committee do |f| %>
+      <div class="form-group">
+        <%= f.label :Nazwa_komitetu %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :Logo %>
+        <%= f.text_field :logo, class:'form-control' %>
+      </div>
+      <%= f.submit "Zapisz", class:'btn btn-primary' %>
+  <% end %>
+</div>

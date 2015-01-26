@@ -11,19 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121181457) do
+ActiveRecord::Schema.define(version: 20150125132645) do
 
   create_table "committees", force: true do |t|
     t.string   "name"
     t.string   "logo"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "committees_voivodeships", force: true do |t|
-    t.integer  "committee_id"
-    t.integer  "voivodeship_id"
-    t.boolean  "is_chosen"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -56,5 +48,4 @@ ActiveRecord::Schema.define(version: 20150121181457) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
 end

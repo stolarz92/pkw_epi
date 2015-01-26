@@ -1,2 +1,23 @@
-<h1>Committees#index</h1>
-<p>Find me in app/views/committees/index.html.erb</p>
+<h2>Komitety wyborcze</h2>
+
+<div class = "container">
+  <table class = "table">
+    <thead>
+    <tr>
+        <th>Nazwa</th>
+        <th>Logo</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @committees.each do |committee| %>
+        <tr>
+          <td><%= committee.name %></td>
+          <td><%= committee.logo %></td>
+        </tr>
+        <% end %>
+    </tbody>
+    <tfoot>
+
+    </tfoot>
+  </table>
+</div>

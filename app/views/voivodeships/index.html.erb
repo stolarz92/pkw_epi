@@ -1,2 +1,23 @@
-<h1>Voivodeships#index</h1>
-<p>Find me in app/views/voivodeships/index.html.erb</p>
+<h2>Województwa</h2>
+
+<div class = "container">
+  <table class = "table">
+    <thead>
+    <tr>
+      <th>Nazwa</th>
+      <th>Ilość miejsc w sejmiku</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @voivodeships.each do |voivodeship| %>
+        <tr>
+          <td><%= voivodeship.name %></td>
+          <td><%= voivodeship.places_regional_council %></td>
+        </tr>
+    <% end %>
+    </tbody>
+    <tfoot>
+
+    </tfoot>
+  </table>
+</div>
