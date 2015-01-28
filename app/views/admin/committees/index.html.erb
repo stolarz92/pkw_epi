@@ -1,0 +1,33 @@
+<h2>Komitety wyborcze</h2>
+
+<div class = "container">
+  <table class = "table">
+    <thead>
+    <tr>
+      <th>Nazwa</th>
+      <th>Logo</th>
+      <th>Akcja</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @committees.each do |committee| %>
+        <tr>
+          <td><%= committee.name %></td>
+          <td><%= committee.logo %></td>
+          <td>
+            <%= link_to 'Edytuj', edit_admin_committee_path(committee), class: 'btn btn-primary' %>
+            <%= link_to 'Usuń',
+                        admin_committee_path(committee),
+                        class: 'btn btn-danger',
+                        method: :delete,
+                        data: {confirm: 'Czy na pewno chcesz usunąć ten komitet?'}
+            %>
+          </td>
+        </tr>
+        <% end %>
+    </tbody>
+    <tfoot>
+
+    </tfoot>
+  </table>
+</div>

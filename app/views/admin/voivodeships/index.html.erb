@@ -1,0 +1,33 @@
+<h2>Województwa</h2>
+
+<div class = "container">
+  <table class = "table">
+    <thead>
+    <tr>
+      <th>Nazwa</th>
+      <th>Ilość miejsc w sejmiku</th>
+      <th>Akcje</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @voivodeships.each do |voivodeship| %>
+        <tr>
+          <td><%= voivodeship.name %></td>
+          <td><%= voivodeship.places_regional_council %></td>
+          <td>
+            <%= link_to 'Edytuj', edit_admin_voivodeship_path(voivodeship), class: 'btn btn-primary' %>
+            <%= link_to 'Usuń',
+                        admin_voivodeships_path(voivodeship),
+                        class: 'btn btn-danger',
+                        method: :delete,
+                        data: {confirm: 'Czy na pewno chcesz usunąć ten okręg?'}
+            %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+    <tfoot>
+
+    </tfoot>
+  </table>
+</div>

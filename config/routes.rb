@@ -1,4 +1,88 @@
 Rails.application.routes.draw do
+  namespace :admin do
+  get 'voivodeships/new'
+  end
+
+  namespace :admin do
+  get 'voivodeships/create'
+  end
+
+  namespace :admin do
+  get 'voivodeships/edit'
+  end
+
+  namespace :admin do
+  get 'voivodeships/update'
+  end
+
+  namespace :admin do
+  get 'voivodeships/destroy'
+  end
+
+  namespace :admin do
+  get 'voivodeships/index'
+  end
+
+  namespace :admin do
+  get 'voivodeships/show'
+  end
+
+  namespace :admin do
+  get 'constituencies/new'
+  end
+
+  namespace :admin do
+  get 'constituencies/create'
+  end
+
+  namespace :admin do
+  get 'constituencies/edit'
+  end
+
+  namespace :admin do
+  get 'constituencies/update'
+  end
+
+  namespace :admin do
+  get 'constituencies/destroy'
+  end
+
+  namespace :admin do
+  get 'constituencies/index'
+  end
+
+  namespace :admin do
+  get 'constituencies/show'
+  end
+
+  namespace :admin do
+  get 'committees/new'
+  end
+
+  namespace :admin do
+  get 'committees/create'
+  end
+
+  namespace :admin do
+  get 'committees/edit'
+  end
+
+  namespace :admin do
+  get 'committees/update'
+  end
+
+  namespace :admin do
+  get 'committees/destroy'
+  end
+
+  namespace :admin do
+  get 'committees/index'
+  end
+
+  namespace :admin do
+  get 'committees/show'
+  end
+
   get 'about/index'
 
   get 'about' => 'about#index'
@@ -61,9 +145,12 @@ Rails.application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-      resources :voivodeships
-      resources :constituencies
-      resources :committees
+  resources :voivodeships, :constituencies, :committees
+
+  namespace :admin do
+    resources :voivodeships, :constituencies, :committees #:users
+  end
+
 
   # Example resource route with options:
   #   resources :products do

@@ -1,19 +1,14 @@
 class ConstituenciesController < ApplicationController
   def new
-    @page_title = 'Dodaj okręg wyborczy'
-    @constituency = Constituency.new
-    @voivodeship = Voivodeship.new
+
   end
 
   def create
-    @constituency = Constituency.new(constituency_params)
-    @constituency.save
 
-    redirect_to constituencies_path
   end
 
   def index
-    @constituencies = Constituency.all
+
   end
 
   def show

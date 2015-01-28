@@ -1,18 +1,13 @@
 class VoivodeshipsController < ApplicationController
   def new
-    @page_title = 'Dodaj nowe województwo'
-    @voivodeship = Voivodeship.new
+
   end
 
   def create
-    @voivodeship = Voivodeship.new(voivodeship_params)
-    @voivodeship.save
 
-    redirect_to voivodeships_path
   end
 
   def index
-    @voivodeships = Voivodeship.all
   end
 
   def show
