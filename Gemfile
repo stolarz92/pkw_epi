@@ -47,3 +47,4 @@ gem 'autoprefixer-rails'
 #gem 'bcrypt', :require => "bcrypt"
 #gem 'mail-form'
 #gem 'simple_form'
+gem 'devise'

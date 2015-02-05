@@ -1,4 +1,7 @@
 class Admin::VoivodeshipsController < Admin::ApplicationController
+
+  before_filter :authenticate_user!
+
   def new
     @page_title = 'Dodaj nowe województwo'
     @voivodeship = Voivodeship.new

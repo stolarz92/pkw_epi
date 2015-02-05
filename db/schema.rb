@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150125132645) do
+ActiveRecord::Schema.define(version: 20150205205432) do
 
   create_table "committees", force: true do |t|
     t.string   "name"
@@ -19,6 +19,14 @@ ActiveRecord::Schema.define(version: 20150125132645) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "committees_voivodeships", force: true do |t|
+    t.integer "committee_id"
+    t.integer "voivodeship_id"
+  end
+
+  add_index "committees_voivodeships", ["committee_id"], name: "index_committees_voivodeships_on_committee_id", using: :btree
+  add_index "committees_voivodeships", ["voivodeship_id"], name: "index_committees_voivodeships_on_voivodeship_id", using: :btree
 
   create_table "constituencies", force: true do |t|
     t.string   "name"
@@ -32,7 +40,38 @@ ActiveRecord::Schema.define(version: 20150125132645) do
     t.integer  "invalid_votes_other"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
+
+  add_index "constituencies", ["user_id"], name: "index_constituencies_on_user_id", using: :btree
+
+  create_table "roles", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["role_id"], name: "index_users_on_role_id", using: :btree
 
   create_table "voivodeships", force: true do |t|
     t.string   "name"
@@ -48,4 +87,5 @@ ActiveRecord::Schema.define(version: 20150125132645) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
 end

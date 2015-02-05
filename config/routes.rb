@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  devise_for :users
+
+  scope "/admin" do
+    resources :users
+  end
+
+  resources :roles
+
+  resources :users
+
+=begin
+
   namespace :admin do
   get 'voivodeships/new'
   end
@@ -82,6 +94,7 @@ Rails.application.routes.draw do
   namespace :admin do
   get 'committees/show'
   end
+=end
 
   get 'about/index'
 
@@ -135,7 +148,8 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'index#index'
+  # root 'index#index'
+  root to: "about#index"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
