@@ -18,9 +18,6 @@ class Admin::CommitteesController < Admin::ApplicationController
     @committees = Committee.all
   end
 
-  def show
-  end
-
   def edit
     @committee = Committee.find_by_id(params[:id])
   end
@@ -47,6 +44,10 @@ class Admin::CommitteesController < Admin::ApplicationController
 
   private
   def committee_params
-    params.require(:committee).permit(:name, :logo)
+    params.require(:committee).permit(
+        :name,
+        :logo,
+        {:voivodeship_ids => []}
+    )
   end
 end

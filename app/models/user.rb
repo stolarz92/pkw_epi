@@ -5,4 +5,14 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   belongs_to :role
   has_one :constituency
+
+  def admin?
+    self.role.name == "Admin"
+  end
+  def central?
+    self.role.name == "Central"
+  end
+  def regional?
+    self.role.name == "Regional"
+  end
 end

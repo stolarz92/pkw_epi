@@ -6,6 +6,7 @@
     <tr>
       <th>Nazwa</th>
       <th>Logo</th>
+      <th>Województwa</th>
       <th>Akcja</th>
     </tr>
     </thead>
@@ -14,6 +15,7 @@
         <tr>
           <td><%= committee.name %></td>
           <td><%= committee.logo %></td>
+          <td></td>
           <td>
             <%= link_to 'Edytuj', edit_admin_committee_path(committee), class: 'btn btn-primary' %>
             <%= link_to 'Usuń',

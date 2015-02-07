@@ -144,6 +144,8 @@ Rails.application.routes.draw do
 
   get 'voivodeships/destroy'
 
+  get '/admin/committees/add' => "admin/committees#add"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -10,6 +10,19 @@
         <%= f.label :Logo %>
         <%= f.text_field :logo, class:'form-control' %>
       </div>
+      <div class="checkbox">
+        <%= f.label :Województwa %>
+
+        <%= hidden_field_tag "committee[voivodeship_ids][]", nil %>
+        <% Voivodeship.all.each do |voivodeship| %>
+            <%= check_box_tag "committee[voivodeship_ids][]",
+                              voivodeship.id,
+                              @committee.voivodeship_ids.include?(voivodeship.id),
+                              id: dom_id(voivodeship)
+            %>
+            <%= label_tag dom_id(voivodeship), voivodeship.name %><br>
+        <% end %>
+      </div>
       <%= f.submit "Zapisz", class:'btn btn-primary' %>
   <% end %>
 </div>
