@@ -11,16 +11,24 @@ class ConstituenciesController < ApplicationController
   end
 
   def index
-
+    @constituencies = Constituency.all
   end
 
   def show
   end
 
   def edit
+    @constituency = Constituency.find_by_id(params[:id])
   end
 
   def update
+    @constituency = Constituency.find_by_id(params[:id])
+
+    if @constituency.update(constituency_params)
+      flash[:notice] = 'Okręg zaktualizowany'
+
+      redirect_to constituencies_path
+    end
   end
 
   def destroy
@@ -31,17 +39,17 @@ class ConstituenciesController < ApplicationController
     params.require(
         :constituency
     ).permit(
-        :name,
+=begin        :name,
         :voivodeship_id,
         :number_of_voters
     )
-=begin  :number_of_voters,
+=end
         :number_of_used_ballots,
         :valid_votes,
         :invalid_votes_no_choice,
         :invalid_votes_more_choices,
         :invalid_votes_other
     )
-=end
+
   end
 end
