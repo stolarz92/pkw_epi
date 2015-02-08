@@ -16,7 +16,11 @@
           <td><%= committee.name %></td>
           <td><%= link_to image_tag(committee.image.url(:small)),
                           committee.image.url %></td>
-          <td></td>
+          <td>
+            <% committee.voivodeships.each do |com| %>
+                <%= com.name %>
+            <% end %>
+          </td>
           <td>
             <%= link_to 'Edytuj', edit_admin_committee_path(committee), class: 'btn btn-primary' %>
             <%= link_to 'Usuń',

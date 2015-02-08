@@ -7,6 +7,7 @@
       <th>Nazwa</th>
       <th>Województwo</th>
       <th>Ilość uprawnionych do głosowania</th>
+      <th>Użytkownik</th>
       <th>Akcja</th>
     </tr>
     </thead>
@@ -16,6 +17,7 @@
           <td><%= constituency.name %></td>
           <td><%= constituency.voivodeship.name %></td>
           <td><%= constituency.number_of_voters %></td>
+          <td><%= constituency.user_id %></td>
           <td>
             <%= link_to 'Edytuj', edit_admin_constituency_path(constituency), class: 'btn btn-primary' %>
             <%= link_to 'Usuń',

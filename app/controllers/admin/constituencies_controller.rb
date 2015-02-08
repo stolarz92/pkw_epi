@@ -6,7 +6,6 @@ class Admin::ConstituenciesController < Admin::ApplicationController
   def new
     @page_title = 'Dodaj okręg wyborczy'
     @constituency = Constituency.new
-    @voivodeship = Voivodeship.new
   end
 
   def create
@@ -54,7 +53,8 @@ class Admin::ConstituenciesController < Admin::ApplicationController
     ).permit(
         :name,
         :voivodeship_id,
-        :number_of_voters
+        :number_of_voters,
+        :user_id
     )
 =begin  :number_of_voters,
         :number_of_used_ballots,
