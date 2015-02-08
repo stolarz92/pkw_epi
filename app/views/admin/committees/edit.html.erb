@@ -8,9 +8,9 @@
       </div>
       <div class="form-group">
         <%= f.label :Logo %>
-        <%= f.text_field :logo, class:'form-control' %>
+        <%= f.file_field :image, class:'form-control' %>
       </div>
-      <div class="checkbox">
+      <div class="form-group">
         <%= f.label :Województwa %>
 
         <%= hidden_field_tag "committee[voivodeship_ids][]", nil %>

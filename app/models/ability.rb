@@ -36,8 +36,11 @@ class Ability
       can :read, Constituency do |constituency|
         constituency.try(:user) == user
       end
+      can :edit, Constituency do |constituency|
+        constituency.try(:user) == user
+      end
       can :update, Constituency do |constituency|
-              constituency.try(:user) == user
+        constituency.try(:user) == user
       end
     end
   end

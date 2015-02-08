@@ -14,7 +14,7 @@
     <% @constituencies.each do |constituency| %>
         <tr>
           <td><%= constituency.name %></td>
-          <td><%= constituency.voivodeship_id %></td>
+          <td><%= constituency.voivodeship.name %></td>
           <td><%= constituency.number_of_voters %></td>
           <td>
             <%= link_to 'Edytuj', edit_admin_constituency_path(constituency), class: 'btn btn-primary' %>

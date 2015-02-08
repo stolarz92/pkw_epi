@@ -1,6 +1,7 @@
 class ConstituenciesController < ApplicationController
 
   before_filter :authenticate_user!
+  load_and_authorize_resource
 
   def new
 
@@ -11,7 +12,9 @@ class ConstituenciesController < ApplicationController
   end
 
   def index
-    @constituencies = Constituency.all
+    @constituencies = Constituency.where(
+        :user_id => current_user.id
+    )
   end
 
   def show
@@ -39,11 +42,6 @@ class ConstituenciesController < ApplicationController
     params.require(
         :constituency
     ).permit(
-=begin        :name,
-        :voivodeship_id,
-        :number_of_voters
-    )
-=end
         :number_of_used_ballots,
         :valid_votes,
         :invalid_votes_no_choice,

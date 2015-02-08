@@ -1,6 +1,7 @@
 class CommitteesController < ApplicationController
 
   before_filter :authenticate_user!
+  load_and_authorize_resource
 
   def new
 
@@ -28,6 +29,10 @@ class CommitteesController < ApplicationController
 
   private
   def committee_params
-    params.require(:committee).permit(:name, :logo)
+    params.require(:committee).permit(
+        :name,
+        :image,
+        {:voivodeship_ids => []}
+    )
   end
 end

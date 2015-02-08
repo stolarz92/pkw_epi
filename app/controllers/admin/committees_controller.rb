@@ -1,6 +1,7 @@
 class Admin::CommitteesController < Admin::ApplicationController
 
   before_filter :authenticate_user!
+  load_and_authorize_resource
 
   def new
     @page_title = 'Dodaj nowy komitet'
@@ -46,7 +47,7 @@ class Admin::CommitteesController < Admin::ApplicationController
   def committee_params
     params.require(:committee).permit(
         :name,
-        :logo,
+        :image,
         {:voivodeship_ids => []}
     )
   end

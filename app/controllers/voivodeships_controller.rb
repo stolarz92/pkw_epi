@@ -1,6 +1,7 @@
 class VoivodeshipsController < ApplicationController
 
   before_filter :authenticate_user!
+  load_and_authorize_resource
 
   def new
 
@@ -11,6 +12,7 @@ class VoivodeshipsController < ApplicationController
   end
 
   def index
+    @voivodeships = Voivodeship.all
   end
 
   def show

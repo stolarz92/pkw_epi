@@ -14,7 +14,8 @@
     <% @committees.each do |committee| %>
         <tr>
           <td><%= committee.name %></td>
-          <td><%= committee.logo %></td>
+          <td><%= link_to image_tag(committee.image.url(:small)),
+                          committee.image.url %></td>
           <td></td>
           <td>
             <%= link_to 'Edytuj', edit_admin_committee_path(committee), class: 'btn btn-primary' %>

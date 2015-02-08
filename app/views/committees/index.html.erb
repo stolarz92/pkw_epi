@@ -12,7 +12,8 @@
     <% @committees.each do |committee| %>
         <tr>
           <td><%= committee.name %></td>
-          <td><%= committee.logo %></td>
+          <td><%= link_to image_tag(@committee.image.url(:med)),
+                          @committee.image.url %></td>
         </tr>
         <% end %>
     </tbody>
