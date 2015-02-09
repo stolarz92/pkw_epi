@@ -1,0 +1,27 @@
+<h1><%= @voivodeship.name %></h1>
+
+<div class="container">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Komitet</th>
+      <th>Liczba zdobytych głosów</th>
+      <th>Procent</th>
+    </tr>
+    </thead>
+    <tbody>
+      <% @voivodeship.committees.map do |committee| %>
+        <tr>
+          <td><%= committee.name %></td>
+          <td>
+            <%= committee.votes.map do |comm| %>
+                <%= comm.sum(:number_of_votes) %>
+            <% end %>
+            </td>
+          <td></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+

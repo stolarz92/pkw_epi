@@ -13,6 +13,7 @@ class Central::ConstituenciesController < Central::ApplicationController
   end
 
   def show
+    @constituency = Constituency.find_by_id(params[:id])
   end
 
   def edit

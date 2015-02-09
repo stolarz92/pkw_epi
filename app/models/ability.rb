@@ -42,6 +42,8 @@ class Ability
       can :update, Constituency do |constituency|
         constituency.try(:user) == user
       end
+      can [:create, :read, :edit, :update], Committee
+      can [:create, :read, :edit, :update], Vote
     end
   end
 end

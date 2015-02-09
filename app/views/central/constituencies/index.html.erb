@@ -1,0 +1,27 @@
+<h2>Okręgi wyborcze</h2>
+
+<div class = "container">
+  <table class = "table">
+    <thead>
+    <tr>
+      <th>Nazwa</th>
+      <th>Województwo</th>
+      <th>Akcja</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @constituencies.each do |constituency| %>
+        <tr>
+          <td><%= constituency.name %></td>
+          <td><%= constituency.voivodeship.name %></td>
+          <td>
+            <%= link_to 'Szczegóły', central_constituency_path(constituency), class: 'btn btn-primary' %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+    <tfoot>
+
+    </tfoot>
+  </table>
+</div>

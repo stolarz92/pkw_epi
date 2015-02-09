@@ -13,6 +13,7 @@ class Central::VoivodeshipsController < Central::ApplicationController
   end
 
   def show
+    @voivodeship = Voivodeship.find_by_id(params[:id])
   end
 
   def edit

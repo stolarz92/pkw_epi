@@ -83,8 +83,8 @@
                 </li>
 
             <% elsif current_user && current_user.central? %>
-                <li class ="<%= params[:controller] == 'voivodeships' ? 'dropdown active' : 'dropdown'  %>">
-                  <%= link_to 'Województwa', voivodeships_path,
+                <li class ="<%= params[:controller] == 'central/voivodeships' ? 'dropdown active' : 'dropdown'  %>">
+                  <%= link_to 'Województwa', central_voivodeships_path,
                               :class => 'dropdown-toggle',
                               :data => {
                                       :toggle => 'dropdown',
@@ -92,10 +92,10 @@
                                       #:aria-expanded => 'false'
                               } %>
                   <ul class="dropdown-menu" role="menu">
-                    <li><%= link_to 'Zobacz województwa', voivodeships_path %></li>
+                    <li><%= link_to 'Zobacz województwa', central_voivodeships_path %></li>
                   </ul>
                 </li>
-                <li class = "<%= params[:controller] == 'admin/constituencies' ? 'dropdown active' : 'dropdown'  %>">
+                <li class = "<%= params[:controller] == 'central/constituencies' ? 'dropdown active' : 'dropdown'  %>">
                   <%= link_to 'Okręgi wyborcze',
                               constituencies_path,
                               :class => 'dropdown-toggle',
@@ -106,11 +106,11 @@
                               }
                   %>
                   <ul class="dropdown-menu" role="menu">
-                    <li><%= link_to 'Zobacz okręgi', constituencies_path %></li>
+                    <li><%= link_to 'Zobacz okręgi', central_constituencies_path %></li>
                   </ul>
                 </li>
-                <li class = "<%= params[:controller] == 'admin/committees' ? 'dropdown active' : 'dropdown'  %>">
-                  <%= link_to 'Komitety', committees_path,
+                <li class = "<%= params[:controller] == 'central/committees' ? 'dropdown active' : 'dropdown'  %>">
+                  <%= link_to 'Komitety', central_committees_path,
                               :class => 'dropdown-toggle',
                               :data => {
                                       :toggle => 'dropdown',
@@ -118,11 +118,11 @@
                                       #:aria-expanded => 'false'
                               } %>
                   <ul class="dropdown-menu" role="menu">
-                    <li><%= link_to 'Zobacz komitety', committees_path %></li>
+                    <li><%= link_to 'Zobacz komitety', central_committees_path %></li>
                   </ul>
                 </li>
             <% elsif current_user && current_user.regional? %>
-                <li class = "<%= params[:controller] == 'admin/constituencies' ? 'dropdown active' : 'dropdown'  %>">
+                <li class = "<%= params[:controller] == 'constituencies' ? 'dropdown active' : 'dropdown'  %>">
                   <%= link_to 'Okręgi wyborcze',
                               constituencies_path,
                               :class => 'dropdown-toggle',
@@ -133,7 +133,22 @@
                               }
                   %>
                   <ul class="dropdown-menu" role="menu">
-                    <li><%= link_to 'Edytuj okręg', constituencies_path %></li>
+                    <li><%= link_to 'Wprowadź dane', constituencies_path %></li>
+                  </ul>
+                </li>
+                <li class = "<%= params[:controller] == 'committee' ? 'dropdown active' : 'dropdown'  %>">
+                  <%= link_to 'Komitety wyborcze',
+                              committees_path,
+                              :class => 'dropdown-toggle',
+                              :data => {
+                                      :toggle => 'dropdown',
+                                      :role => 'button',
+                                      #:aria-expanded => 'false'
+                              }
+                  %>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><%= link_to 'Ilość głosów', votes_path %></li>
+                    <li><%= link_to 'Wprowadź głosy', committees_path %></li>
                   </ul>
                 </li>
 

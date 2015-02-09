@@ -1,0 +1,32 @@
+<h2>Okręgi wyborcze</h2>
+
+<div class = "container">
+  <table class = "table">
+    <thead>
+    <tr>
+      <th>Nazwa</th>
+      <th>Województwo</th>
+      <th>Ilość uprawnionych do głosowania</th>
+      <th>Wydane karty</th>
+      <th>Głosy nieważne (brak głosu)</th>
+      <th>Głosy nieważne (dwa głosy)</th>
+      <th>Głosy nieważne (inne)</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><%= @constituency.name %></td>
+          <td><%= @constituency.voivodeship.name %></td>
+          <td><%= @constituency.number_of_voters %></td>
+          <td><%= @constituency.number_of_used_ballots %></td>
+          <td><%= @constituency.invalid_votes_no_choice %></td>
+          <td><%= @constituency.invalid_votes_more_choices %></td>
+          <td><%= @constituency.invalid_votes_other %></td>
+        </tr>
+    </tbody>
+    <tfoot>
+    </tfoot>
+  </table>
+  <h4>Frekwencja: <%= (@constituency.number_of_used_ballots.to_f/@constituency.number_of_voters.to_f).round(3) * 100 %>%</h4>
+
+</div>

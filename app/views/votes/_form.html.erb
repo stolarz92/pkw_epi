@@ -1,0 +1,39 @@
+<%= form_for(@vote, class: "form-horizontal") do |f| %>
+    <div class="form-group">
+      <% if @vote.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@vote.errors.count, "error") %> Nie udało się zapisać głosów:</h2>
+            <ul class="text-danger">
+              <% @vote.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= f.hidden_field :constituency_id,
+                         :value => @constituency.id,
+                         class: "form-control"
+      %>
+      </div>
+    <div class="form-group">
+      <%= f.hidden_field :committee_id,
+                         :value => @committee.id,
+                         class: "form-control"
+      %>
+    </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :amount, 'Liczba głosów', class: 'col-sm-2 control-label' %>
+      <%= f.text_field :number_of_votes, class: 'form-control' %></div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <%= f.submit "Zapisz", class: "btn btn-default" %>
+      </div>
+    </div>
+<% end %>
+
+<%= @committee.inspect %>

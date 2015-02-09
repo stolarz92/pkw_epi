@@ -1,0 +1,25 @@
+<h2>Województwa</h2>
+
+<div class = "container">
+  <table class = "table">
+    <thead>
+    <tr>
+      <th>Województwo</th>
+      <th>Akcja</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @voivodeships.each do |voivodeship| %>
+        <tr>
+          <td><%= voivodeship.name %></td>
+          <td>
+            <%= link_to 'Szczegóły', central_voivodeship_path(voivodeship), class: 'btn btn-primary' %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+    <tfoot>
+
+    </tfoot>
+  </table>
+</div>

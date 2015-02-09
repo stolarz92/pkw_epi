@@ -1,12 +1,14 @@
+<h2>Ilość głosów oddana na poszczególne komitety</h2>
+
 <h2>Komitety wyborcze</h2>
 
 <div class = "container">
   <table class = "table">
     <thead>
     <tr>
-        <th>Nazwa</th>
-        <th>Logo</th>
-        <th>Akcja</th>
+      <th>Nazwa</th>
+      <th>Logo</th>
+      <th>Ilość głosów w okręgu</th>
     </tr>
     </thead>
     <tbody>
@@ -15,10 +17,8 @@
           <td><%= committee.name %></td>
           <td><%= link_to image_tag(committee.image.url(:small)),
                           committee.image.url %></td>
-          <td>
-            <%= link_to 'Wprowadź głosy',
-                        new_vote_path(:id => committee.id),
-                        class: 'btn btn-primary' %>
+          <td><%= committee.votes(:constituency_id => @constituency.id).inspect
+          %>
           </td>
         </tr>
     <% end %>
