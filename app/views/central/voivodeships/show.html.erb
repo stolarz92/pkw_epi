@@ -14,9 +14,9 @@
         <tr>
           <td><%= committee.name %></td>
           <td>
-            <%= committee.votes.map do |comm| %>
-                <%= comm.sum(:number_of_votes) %>
-            <% end %>
+            <%= committee.votes.all.map do |comm| %>
+                <% comm.number_of_votes %>
+            <% end.join(", ") %>
             </td>
           <td></td>
         </tr>

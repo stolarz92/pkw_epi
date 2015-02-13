@@ -14,6 +14,9 @@ class Central::VoivodeshipsController < Central::ApplicationController
 
   def show
     @voivodeship = Voivodeship.find_by_id(params[:id])
+
+    @voi = @voivodeship.committees.all.inject(0){|s,c| s + c.votes.sum(:number_of_votes) }
+
   end
 
   def edit

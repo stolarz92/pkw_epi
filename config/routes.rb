@@ -57,12 +57,32 @@ Rails.application.routes.draw do
 
   get 'voivodeships/destroy'
 
+  match '/admin/voivodeships_index', to: 'admin/voivodeships#voivodeships_index', via: 'get'
+
+  resources :voivodeships, :constituencies, :committees
+
+  namespace :admin do
+    resources :voivodeships, :constituencies, :committees #:users
+  end
+
+
+  namespace :admin do
+    resources :voivodeships do
+      resources :constituencies
+    end
+  end
+
+  namespace :central do
+    resources :voivodeships, :constituencies, :committees #:users
+  end
+
+  root to: "about#index"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   # root 'index#index'
-  root to: "about#index"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -72,15 +92,7 @@ Rails.application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-  resources :voivodeships, :constituencies, :committees
 
-  namespace :admin do
-    resources :voivodeships, :constituencies, :committees #:users
-  end
-
-  namespace :central do
-    resources :voivodeships, :constituencies, :committees #:users
-  end
 
 
   # Example resource route with options:

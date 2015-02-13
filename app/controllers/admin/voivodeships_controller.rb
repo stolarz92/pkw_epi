@@ -5,7 +5,6 @@ class Admin::VoivodeshipsController < Admin::ApplicationController
 
   def new
     @page_title = 'Dodaj nowe województwo'
-    @voivodeship = Voivodeship.new
   end
 
   def create
@@ -19,15 +18,16 @@ class Admin::VoivodeshipsController < Admin::ApplicationController
     @voivodeships = Voivodeship.all
   end
 
-  def show
+  def voivodeships_index
+    @voivodeships = Voivodeship.all
   end
 
   def edit
-    @voivodeship = Voivodeship.find_by_id(params[:id])
+    @voivodeship = set_voivodeship
   end
 
   def update
-    @voivodeship = Voivodeship.find_by_id(params[:id])
+    @voivodeship = set_voivodeship
     if @voivodeship.update(voivodeship_params)
       flash[:notice] = 'Województwo uaktualnione'
       redirect_to admin_voivodeships_path
@@ -37,7 +37,7 @@ class Admin::VoivodeshipsController < Admin::ApplicationController
   end
 
   def destroy
-    @voivodeship = Voivodeship.find_by_id(params[:id])
+    @voivodeship = set_voivodeship
     @voivodeship.destroy
 
     redirect_to admin_voivodeships_path
@@ -46,6 +46,10 @@ class Admin::VoivodeshipsController < Admin::ApplicationController
   private
   def voivodeship_params
     params.require(:voivodeship).permit(:name, :places_regional_council)
+  end
+
+  def set_voivodeship
+    Voivodeship.find_by_id(params[:id])
   end
 
 end

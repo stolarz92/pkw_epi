@@ -1,40 +1,48 @@
 <h2>Komitety wyborcze</h2>
 
 <div class = "container">
-  <table class = "table">
-    <thead>
-    <tr>
-      <th>Nazwa</th>
-      <th>Logo</th>
-      <th>Województwa</th>
-      <th>Akcja</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @committees.each do |committee| %>
+  <% if @committees && @committees.exists? %>
+      <table class = "table">
+        <thead>
         <tr>
-          <td><%= committee.name %></td>
-          <td><%= link_to image_tag(committee.image.url(:small)),
-                          committee.image.url %></td>
-          <td>
-            <% committee.voivodeships.each do |com| %>
-                <%= com.name %>
-            <% end %>
-          </td>
-          <td>
-            <%= link_to 'Edytuj', edit_admin_committee_path(committee), class: 'btn btn-primary' %>
-            <%= link_to 'Usuń',
-                        admin_committee_path(committee),
-                        class: 'btn btn-danger',
-                        method: :delete,
-                        data: {confirm: 'Czy na pewno chcesz usunąć ten komitet?'}
-            %>
-          </td>
+          <th>Lp.</th>
+          <th>Nazwa</th>
+          <th>Logo</th>
+          <th>Województwa</th>
+          <th>Akcja</th>
         </tr>
+        </thead>
+        <tbody>
+        <% @committees.each do |committee| %>
+            <tr>
+              <td><%= committee.id %></td>
+              <td><%= committee.name %></td>
+              <td><%= link_to image_tag(committee.image.url(:small)), committee.image.url %></td>
+              <td>
+                <% committee.voivodeships.each do |com| %>
+                    <%= com.name %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to 'Edytuj',
+                            edit_admin_committee_path(committee),
+                            class: 'btn btn-primary'
+                %>
+                <%= link_to 'Usuń',
+                            admin_committee_path(committee),
+                            class: 'btn btn-danger',
+                            method: :delete,
+                            data: {confirm: 'Czy na pewno chcesz usunąć ten komitet?'}
+                %>
+              </td>
+            </tr>
         <% end %>
-    </tbody>
-    <tfoot>
+        </tbody>
+        <tfoot>
 
-    </tfoot>
-  </table>
+        </tfoot>
+      </table>
+  <% else %>
+      <p>Nie ma jeszcze żadnych komitetów</p>
+  <% end %>
 </div>

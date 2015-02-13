@@ -1,37 +1,41 @@
 <h2>Okręgi wyborcze</h2>
 
 <div class = "container">
-  <table class = "table">
-    <thead>
-    <tr>
-      <th>Nazwa</th>
-      <th>Województwo</th>
-      <th>Ilość uprawnionych do głosowania</th>
-      <th>Użytkownik</th>
-      <th>Akcja</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @constituencies.each do |constituency| %>
+  <% if @constituencies && @constituencies.exists? %>
+      <table class = "table">
+        <thead>
         <tr>
-          <td><%= constituency.name %></td>
-          <td><%= constituency.voivodeship.name %></td>
-          <td><%= constituency.number_of_voters %></td>
-          <td><%= constituency.user_id %></td>
-          <td>
-            <%= link_to 'Edytuj', edit_admin_constituency_path(constituency), class: 'btn btn-primary' %>
-            <%= link_to 'Usuń',
-                        admin_constituency_path(constituency),
-                        class: 'btn btn-danger',
-                        method: :delete,
-                        data: {confirm: 'Czy na pewno chcesz usunąć ten okręg?'}
-            %>
-          </td>
+          <th>Lp.</th>
+          <th>Województwo</th>
+          <th>Ilość uprawnionych do głosowania</th>
+          <th>Członek komisji</th>
+          <th>Akcja</th>
         </tr>
-    <% end %>
-    </tbody>
-    <tfoot>
+        </thead>
+        <tbody>
+        <% @constituencies.each do |constituency| %>
+            <tr>
+              <td><%= constituency.id %></td>
+              <td><%= constituency.name %></td>
+              <td><%= constituency.number_of_voters %></td>
+              <td><%= constituency.user.name %></td>
+              <td>
+                <%= link_to 'Edytuj', edit_admin_constituency_path(constituency), class: 'btn btn-primary' %>
+                <%= link_to 'Usuń',
+                            admin_constituency_path(constituency),
+                            class: 'btn btn-danger',
+                            method: :delete,
+                            data: {confirm: 'Czy na pewno chcesz usunąć ten okręg?'}
+                %>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+        <tfoot>
 
-    </tfoot>
-  </table>
+        </tfoot>
+      </table>
+  <% else %>
+      <p>Nie ma jeszcze żadnych okręgów</p>
+  <% end %>
 </div>

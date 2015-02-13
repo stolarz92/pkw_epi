@@ -1,0 +1,36 @@
+<%= form_for [:admin, @constituency] do |f| %>
+    <div class="form-group">
+      <%= f.label :Nazwa_okręgu %>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :Województwo %>
+      <%= collection_select(
+                  :constituency,
+                  :voivodeship_id,
+                  Voivodeship.all,
+                  :id,
+                  :name,
+                  {prompt: 'Wybierz województwo'},
+                  {class: 'form-control'})
+      %>
+    </div>
+    <div class="form-group">
+      <%= f.label :Użytkownik %>
+      <%= collection_select(
+                  :constituency,
+                  :user_id,
+                  User.all,
+                  :id,
+                  :name,
+                  {prompt: 'Wybierz użytkownika'},
+                  {class: 'form-control'})
+      %>
+    </div>
+    <div class="form-group">
+      <%= f.label :Ilość_uprawnionych_do_głosowania %>
+      <%= f.text_field :number_of_voters, class:'form-control' %>
+    </div>
+
+    <%= f.submit 'Zapisz', class:'btn btn-primary' %>
+<% end %>

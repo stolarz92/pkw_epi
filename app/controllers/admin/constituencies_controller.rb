@@ -9,14 +9,15 @@ class Admin::ConstituenciesController < Admin::ApplicationController
   end
 
   def create
+    @voivodeship = set_voivodeship
     @constituency = Constituency.new(constituency_params)
     @constituency.save
 
-    redirect_to admin_constituencies_path
+    redirect_to admin_voivodeship_constituencies_path(@voivodeship)
   end
 
   def index
-    @constituencies = Constituency.all
+    @constituencies = Constituency.get_constituencies_from_voivodeship(params[:voivodeship_id])
   end
 
   def show
@@ -27,12 +28,12 @@ class Admin::ConstituenciesController < Admin::ApplicationController
   end
 
   def update
+    @voivodeship = set_voivodeship
     @constituency = Constituency.find_by_id(params[:id])
 
     if @constituency.update(constituency_params)
       flash[:notice] = 'Okręg zaktualizowany'
-
-      redirect_to admin_constituencies_path
+      redirect_to admin_voivodeship_constituencies_path(@voivodeship)
     else
       render 'new'
     end
@@ -40,29 +41,25 @@ class Admin::ConstituenciesController < Admin::ApplicationController
 
   def destroy
     @constituency = Constituency.find_by_id(params[:id])
+    @voivodeship = set_voivodeship
     @constituency.destroy
 
     flash[:notice] = 'Okręg usunięty'
-    redirect_to admin_constituencies_path
+    redirect_to admin_voivodeship_constituencies_path(@voivodeship)
   end
 
   private
   def constituency_params
-    params.require(
-        :constituency
-    ).permit(
+    params.require(:constituency).permit(
         :name,
         :voivodeship_id,
         :number_of_voters,
         :user_id
     )
-=begin  :number_of_voters,
-        :number_of_used_ballots,
-        :valid_votes,
-        :invalid_votes_no_choice,
-        :invalid_votes_more_choices,
-        :invalid_votes_other
-    )
-=end
   end
+
+  def set_voivodeship
+    @voivodeship = @constituency.voivodeship
+  end
+
 end

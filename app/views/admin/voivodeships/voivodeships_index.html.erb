@@ -7,7 +7,6 @@
         <tr>
           <th>Lp.</th>
           <th>Nazwa</th>
-          <th>Ilość miejsc w sejmiku</th>
           <th>Akcje</th>
         </tr>
         </thead>
@@ -16,15 +15,10 @@
             <tr>
               <td><%= voivodeship.id %></td>
               <td><%= voivodeship.name %></td>
-              <td><%= voivodeship.places_regional_council %></td>
               <td>
-                <%= link_to 'Edytuj województwo', edit_admin_voivodeship_path(voivodeship), class: 'btn btn-primary' %>
-                <%= link_to 'Usuń',
-                            admin_voivodeship_path(voivodeship),
-                            class: 'btn btn-danger',
-                            method: :delete,
-                            data: {confirm: 'Czy na pewno chcesz usunąć ten okręg?'}
-                %>
+                <%= link_to 'Edytuj okręgi w województwie',
+                            admin_voivodeship_constituencies_path(voivodeship),
+                            class: 'btn btn-primary' %>
               </td>
             </tr>
         <% end %>
