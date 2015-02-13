@@ -23,11 +23,11 @@ class Admin::VoivodeshipsController < Admin::ApplicationController
   end
 
   def edit
-    @voivodeship = set_voivodeship
+    @voivodeship = Voivodeship.set_voivodeship(params)
   end
 
   def update
-    @voivodeship = set_voivodeship
+    @voivodeship = Voivodeship.set_voivodeship(params)
     if @voivodeship.update(voivodeship_params)
       flash[:notice] = 'Województwo uaktualnione'
       redirect_to admin_voivodeships_path
@@ -37,7 +37,7 @@ class Admin::VoivodeshipsController < Admin::ApplicationController
   end
 
   def destroy
-    @voivodeship = set_voivodeship
+    @voivodeship = Voivodeship.set_voivodeship(params)
     @voivodeship.destroy
 
     redirect_to admin_voivodeships_path
@@ -46,10 +46,6 @@ class Admin::VoivodeshipsController < Admin::ApplicationController
   private
   def voivodeship_params
     params.require(:voivodeship).permit(:name, :places_regional_council)
-  end
-
-  def set_voivodeship
-    Voivodeship.find_by_id(params[:id])
   end
 
 end

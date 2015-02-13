@@ -21,11 +21,11 @@ class ConstituenciesController < ApplicationController
   end
 
   def edit
-    @constituency = Constituency.find_by_id(params[:id])
+    @constituency = set_constituency
   end
 
   def update
-    @constituency = Constituency.find_by_id(params[:id])
+    @constituency = set_constituency
 
     if @constituency.update(constituency_params)
       flash[:notice] = 'Okręg zaktualizowany'
@@ -49,5 +49,9 @@ class ConstituenciesController < ApplicationController
         :invalid_votes_other
     )
 
+  end
+
+  def set_constituency
+    Constituency.find_by_id(params[:id])
   end
 end

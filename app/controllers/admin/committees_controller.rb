@@ -20,11 +20,11 @@ class Admin::CommitteesController < Admin::ApplicationController
   end
 
   def edit
-    @committee = set_committee
+    @committee = Committee.set_committee(params)
   end
 
   def update
-    @committee = set_committee
+    @committee = Committee.set_committee(params)
 
     if @committee.update(committee_params)
       flash[:notice] = 'Komitet uaktualniony'
@@ -36,7 +36,7 @@ class Admin::CommitteesController < Admin::ApplicationController
   end
 
   def destroy
-    @committee = set_committee
+    @committee = Committee.set_committee(params)
     @committee.destroy
 
     flash[:notice] = 'Komitet został usunięty'
@@ -50,10 +50,6 @@ class Admin::CommitteesController < Admin::ApplicationController
         :image,
         {:voivodeship_ids => []}
     )
-  end
-
-  def set_committee
-    Committee.find_by_id(params[:id])
   end
 
 end

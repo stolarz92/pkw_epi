@@ -9,8 +9,9 @@ class Admin::ConstituenciesController < Admin::ApplicationController
   end
 
   def create
-    @voivodeship = set_voivodeship
     @constituency = Constituency.new(constituency_params)
+    @voivodeship = Constituency.set_voivodeship(@constituency)
+
     @constituency.save
 
     redirect_to admin_voivodeship_constituencies_path(@voivodeship)
@@ -28,8 +29,9 @@ class Admin::ConstituenciesController < Admin::ApplicationController
   end
 
   def update
-    @voivodeship = set_voivodeship
     @constituency = Constituency.find_by_id(params[:id])
+    @voivodeship = Constituency.set_voivodeship(@constituency)
+
 
     if @constituency.update(constituency_params)
       flash[:notice] = 'Okręg zaktualizowany'
@@ -41,7 +43,8 @@ class Admin::ConstituenciesController < Admin::ApplicationController
 
   def destroy
     @constituency = Constituency.find_by_id(params[:id])
-    @voivodeship = set_voivodeship
+    @voivodeship = Constituency.set_voivodeship(@constituency)
+
     @constituency.destroy
 
     flash[:notice] = 'Okręg usunięty'
@@ -56,10 +59,6 @@ class Admin::ConstituenciesController < Admin::ApplicationController
         :number_of_voters,
         :user_id
     )
-  end
-
-  def set_voivodeship
-    @voivodeship = @constituency.voivodeship
   end
 
 end

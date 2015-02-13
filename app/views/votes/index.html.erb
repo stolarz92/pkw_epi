@@ -1,6 +1,4 @@
-<h2>Ilość głosów oddana na poszczególne komitety</h2>
-
-<h2>Komitety wyborcze</h2>
+<h2>Ilość głosów oddana na komitety w <%= @current_constituency.name %></h2>
 
 <div class = "container">
   <table class = "table">
@@ -12,19 +10,22 @@
     </tr>
     </thead>
     <tbody>
-    <% @current_user.constituency.voivodeship.committees.map do |committee| %>
+    <% @committees.each do |committee| %>
         <tr>
           <td><%= committee.name %></td>
-          <td><%= link_to image_tag(committee.image.url(:small)),
-                          committee.image.url %></td>
-          <td><%= committee.votes(:constituency_id => @constituency.id).inspect
-          %>
+          <td><%= link_to image_tag(committee.image.url(:small)), committee.image.url %></td>
+          <td>
+            <% @votes.each do |vote| %>
+                <%= committee.id == vote.committee.id && @current_constituency.id == vote.constituency_id ? vote.number_of_votes : nil %>
+            <% end %>
           </td>
         </tr>
     <% end %>
     </tbody>
     <tfoot>
-
     </tfoot>
   </table>
 </div>
+
+<%= debug(@votes) %>
+<%= debug(@committees) %>

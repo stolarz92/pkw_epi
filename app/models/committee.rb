@@ -12,4 +12,8 @@ class Committee < ActiveRecord::Base
   validates_attachment_content_type :image,
                                     :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/svn"]
 
+  def self.set_committee(params)
+    Committee.find_by_id(params[:id])
+  end
+
 end

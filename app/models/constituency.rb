@@ -8,4 +8,8 @@ class Constituency < ActiveRecord::Base
     @constituencies = voivodeship.constituencies
   end
 
+  def self.set_voivodeship(constituency)
+    constituency.voivodeship
+  end
+
 end
