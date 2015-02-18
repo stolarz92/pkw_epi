@@ -1,4 +1,4 @@
-<h2>Ilość głosów oddana na komitety w <%= @current_constituency.name %></h2>
+<h2>Ilość głosów oddana na komitety w <%= @constituency.name %></h2>
 
 <div class = "container">
   <table class = "table">
@@ -7,17 +7,21 @@
       <th>Nazwa</th>
       <th>Logo</th>
       <th>Ilość głosów w okręgu</th>
+      <th>Akcja</th>
     </tr>
     </thead>
     <tbody>
-    <% @committees.each do |committee| %>
+    <% @votes.each do |vote| %>
         <tr>
-          <td><%= committee.name %></td>
-          <td><%= link_to image_tag(committee.image.url(:small)), committee.image.url %></td>
+          <td><%= vote.committee.name %></td>
+          <td><%= link_to image_tag(vote.committee.image.url(:small)), vote.committee.image.url %></td>
           <td>
-            <% @votes.each do |vote| %>
-                <%= committee.id == vote.committee.id && @current_constituency.id == vote.constituency_id ? vote.number_of_votes : nil %>
-            <% end %>
+            <%= vote.number_of_votes %>
+          </td>
+          <td>
+            <%= link_to 'Edytuj głosy',
+                        edit_vote_path(:id => vote.id),
+                        class: 'btn btn-primary' %>
           </td>
         </tr>
     <% end %>
@@ -25,7 +29,8 @@
     <tfoot>
     </tfoot>
   </table>
+  <%= link_to 'Wprowadź głosy',
+              new_vote_path,
+              class: 'btn btn-success' %>
 </div>
 
-<%= debug(@votes) %>
-<%= debug(@committees) %>

@@ -1,14 +1,17 @@
 class VotesController < ApplicationController
     before_filter :authenticate_user!
     load_and_authorize_resource
+    before_action  :set_constituency, only: [:new, :create, :edit, :index, :update]
 
     def new
-      @constituency = Vote.set_constituency(current_user)
-      @committee = Vote.set_committee(params)
+      @vote = Vote.new
+      @committees = Vote.get_all_committees_for_current_constituency(@current_user)
     end
 
     def create
       @vote = Vote.new(vote_params)
+      @committees = Vote.get_all_committees_for_current_constituency(@current_user)
+
 
       if @vote.save
         flash[:notice] = 'Głosy zostały dodane'
@@ -18,19 +21,23 @@ class VotesController < ApplicationController
       end
     end
 
+    def edit
+      @committee = @vote.committee.name
+      @vote = set_vote(params)
+    end
+
     def update
       if @vote.update(vote_params)
         flash[:notice] = 'Dane zostały zmienione'
-        redirect_to @vote
+        redirect_to votes_path
       else
         render :action => 'edit'
       end
     end
 
     def index
-      @current_constituency = @current_user.constituency
-      @committees = Vote.get_all_committees_for_current_user(@current_user)
-      @votes = Vote.get_votes_for_committees(@committees)
+      @committees = Vote.get_all_committees_for_current_constituency(@current_user)
+      @votes = Vote.get_votes(@constituency.id, @committees)
     end
 
     private
@@ -41,5 +48,17 @@ class VotesController < ApplicationController
             :number_of_votes
         )
       end
+
+    def set_vote(params)
+      @vote = Vote.find(params[:id])
+    end
+
+    def set_committee(params)
+      @committee = Committee.find(params[:id])
+    end
+
+    def set_constituency
+      @constituency = @current_user.constituency
+    end
 
 end

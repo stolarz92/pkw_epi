@@ -10,15 +10,22 @@
     </tr>
     </thead>
     <tbody>
-    <% @current_user.constituency.voivodeship.committees.map do |committee| %>
+    <% @committees.each do |committee| %>
+    <%= debug(committee.votes.where("constituency_id = ?", @constituency)) %>
         <tr>
           <td><%= committee.name %></td>
           <td><%= link_to image_tag(committee.image.url(:small)),
                           committee.image.url %></td>
           <td>
-            <%= link_to 'Wprowadź głosy',
-                        new_vote_path(:id => committee.id),
-                        class: 'btn btn-primary' %>
+            <% if committee.votes.exists? %>
+                <%= link_to 'Edytuj głosy',
+                            edit_vote_path(:id => committee.id),
+                            class: 'btn btn-primary' %>
+            <% else %>
+                <%= link_to 'Wprowadź głosy',
+                            new_vote_path(:id => committee.id),
+                            class: 'btn btn-primary' %>
+            <% end %>
           </td>
         </tr>
     <% end %>

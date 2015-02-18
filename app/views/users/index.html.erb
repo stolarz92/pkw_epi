@@ -1,27 +1,32 @@
-<h1>Listing users</h1>
+<h1>Użytkownicy</h1>
 
 <table class="table">
   <thead>
-    <tr>
-      <th>Name</th>
-      <th>Role</th>
-      <th colspan="3">Action</th>
-    </tr>
+  <tr>
+    <th>Nazwa</th>
+    <th>Rola</th>
+    <th colspan="3">Akcja</th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @users.each do |user| %>
+  <% @users.each do |user| %>
       <tr>
         <td><%= user.name %></td>
         <td><%= user.role.name %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Pokaż', user,class: 'btn btn-info' %></td>
+        <td><%= link_to 'Edytuj', edit_user_path(user), class: 'btn btn-primary' %></td>
+        <td><%= link_to 'Usuń',
+                        user,
+                        method: :delete,
+                        data: { confirm: 'Jesteś pewien?' },
+                        class: 'btn btn-danger'
+        %></td>
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New User', new_user_path %>
+<%= link_to 'Nowy użytkownik', new_user_path, class: 'btn btn-success' %>

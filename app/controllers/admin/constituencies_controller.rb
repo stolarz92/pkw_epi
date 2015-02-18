@@ -12,9 +12,12 @@ class Admin::ConstituenciesController < Admin::ApplicationController
     @constituency = Constituency.new(constituency_params)
     @voivodeship = Constituency.set_voivodeship(@constituency)
 
-    @constituency.save
-
-    redirect_to admin_voivodeship_constituencies_path(@voivodeship)
+    if @constituency.save
+      flash[:notice] = 'Okręg utworzony'
+      redirect_to admin_voivodeship_constituencies_path(@voivodeship)
+    else
+      render 'new'
+    end
   end
 
   def index

@@ -7,173 +7,174 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button"
-                  class="navbar-toggle collapsed"
-                  data-toggle="collapse"
-                  data-target="#navbar"
-                  aria-expanded="false"
-                  aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <%= link_to 'PKW_EPI', root_path, class:'navbar-brand' %>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-
-            <% if current_user && current_user.admin? %>
-                <li class ="<%= (params[:controller] == 'admin/voivodeships' && params[:action] != 'voivodeships_index') ? 'dropdown active' : 'dropdown'  %>">
-                  <%= link_to 'Województwa', admin_voivodeships_path,
-                              :class => 'dropdown-toggle',
-                              :data => {
-                                      :toggle => 'dropdown',
-                                      :role => 'button',
-                                      #:aria-expanded => 'false'
-                              } %>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><%= link_to 'Dodaj województwo', new_admin_voivodeship_path %></li>
-                    <li><%= link_to 'Edytuj województwa', admin_voivodeships_path %></li>
-                  </ul>
-                </li>
-                <li class = "<%= (params[:controller] == 'admin/constituencies' || params[:action] == 'voivodeships_index') ? 'dropdown active' : 'dropdown'  %>">
-                  <%= link_to 'Okręgi wyborcze',
-                              admin_constituencies_path,
-                              :class => 'dropdown-toggle',
-                              :data => {
-                                      :toggle => 'dropdown',
-                                      :role => 'button',
-                                      #:aria-expanded => 'false'
-                              }
-                  %>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><%= link_to 'Dodaj okręg', new_admin_constituency_path %></li>
-                    <li><%= link_to 'Edytuj okręgi', admin_voivodeships_index_path %></li>
-                  </ul>
-                </li>
-                <li class = "<%= params[:controller] == 'admin/committees' ? 'dropdown active' : 'dropdown'  %>">
-                  <%= link_to 'Komitety', admin_committees_path,
-                              :class => 'dropdown-toggle',
-                              :data => {
-                                      :toggle => 'dropdown',
-                                      :role => 'button',
-                                      #:aria-expanded => 'false'
-                              } %>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><%= link_to 'Dodaj komitet', new_admin_committee_path %></li>
-                    <li><%= link_to 'Edytuj komitety', admin_committees_path %></li>
-                  </ul>
-                </li>
-                <li class = "<%= params[:controller] == 'admin/users' ? 'dropdown active' : 'dropdown'  %>">
-                  <%= link_to 'Użytkownicy', users_path,
-                              :class => 'dropdown-toggle',
-                              :data => {
-                                      :toggle => 'dropdown',
-                                      :role => 'button',
-                                      #:aria-expanded => 'false'
-                              } %>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><%= link_to 'Dodaj użytkownika', new_user_path %></li>
-                    <li><%= link_to 'Edytuj użytkowników', users_path %></li>
-                  </ul>
-                </li>
-
-            <% elsif current_user && current_user.central? %>
-                <li class ="<%= params[:controller] == 'central/voivodeships' ? 'dropdown active' : 'dropdown'  %>">
-                  <%= link_to 'Województwa', central_voivodeships_path,
-                              :class => 'dropdown-toggle',
-                              :data => {
-                                      :toggle => 'dropdown',
-                                      :role => 'button',
-                                      #:aria-expanded => 'false'
-                              } %>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><%= link_to 'Zobacz województwa', central_voivodeships_path %></li>
-                  </ul>
-                </li>
-                <li class = "<%= params[:controller] == 'central/constituencies' ? 'dropdown active' : 'dropdown'  %>">
-                  <%= link_to 'Okręgi wyborcze',
-                              constituencies_path,
-                              :class => 'dropdown-toggle',
-                              :data => {
-                                      :toggle => 'dropdown',
-                                      :role => 'button',
-                                      #:aria-expanded => 'false'
-                              }
-                  %>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><%= link_to 'Zobacz okręgi', central_constituencies_path %></li>
-                  </ul>
-                </li>
-                <li class = "<%= params[:controller] == 'central/committees' ? 'dropdown active' : 'dropdown'  %>">
-                  <%= link_to 'Komitety', central_committees_path,
-                              :class => 'dropdown-toggle',
-                              :data => {
-                                      :toggle => 'dropdown',
-                                      :role => 'button',
-                                      #:aria-expanded => 'false'
-                              } %>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><%= link_to 'Zobacz komitety', central_committees_path %></li>
-                  </ul>
-                </li>
-            <% elsif current_user && current_user.regional? %>
-                <li class = "<%= params[:controller] == 'constituencies' ? 'dropdown active' : 'dropdown'  %>">
-                  <%= link_to 'Okręgi wyborcze',
-                              constituencies_path,
-                              :class => 'dropdown-toggle',
-                              :data => {
-                                      :toggle => 'dropdown',
-                                      :role => 'button',
-                                      #:aria-expanded => 'false'
-                              }
-                  %>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><%= link_to 'Wprowadź dane', constituencies_path %></li>
-                  </ul>
-                </li>
-                <li class = "<%= params[:controller] == 'committee' ? 'dropdown active' : 'dropdown'  %>">
-                  <%= link_to 'Komitety wyborcze',
-                              committees_path,
-                              :class => 'dropdown-toggle',
-                              :data => {
-                                      :toggle => 'dropdown',
-                                      :role => 'button',
-                                      #:aria-expanded => 'false'
-                              }
-                  %>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><%= link_to 'Ilość głosów', votes_path %></li>
-                    <li><%= link_to 'Wprowadź głosy', committees_path %></li>
-                  </ul>
-                </li>
-
-            <% end %>
-            <li class = "<%= params[:controller] == 'about' ? 'active' : ''  %>">
-              <%= link_to 'O aplikacji', about_path %>
-            </li>
-            <ul class="nav navbar-nav navbar-right">
-              <% if user_signed_in? %>
-                  <li><%= link_to "Wyloguj", destroy_user_session_path, :method => :delete %></li>
-              <% else %>
-                  <li><%= link_to "Zaloguj się", new_user_session_path %></li>
-              <% end %>
-            </ul>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
-
-    <div class = "container">
-      <div class="alert-info">
-      <% flash.each do |name, msg| %>
-          <%= content_tag :div, msg, id: "flash_#{name}" %>
-      <% end %>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button"
+              class="navbar-toggle collapsed"
+              data-toggle="collapse"
+              data-target="#navbar"
+              aria-expanded="false"
+              aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to 'PKW_EPI', root_path, class:'navbar-brand' %>
     </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+
+        <% if current_user && current_user.admin? %>
+            <li class ="<%= (params[:controller] == 'admin/voivodeships' && params[:action] != 'voivodeships_index') ? 'dropdown active' : 'dropdown'  %>">
+              <%= link_to 'Województwa', admin_voivodeships_path,
+                          :class => 'dropdown-toggle',
+                          :data => {
+                                  :toggle => 'dropdown',
+                                  :role => 'button',
+                                  #:aria-expanded => 'false'
+                          } %>
+              <ul class="dropdown-menu" role="menu">
+                <li><%= link_to 'Dodaj województwo', new_admin_voivodeship_path %></li>
+                <li><%= link_to 'Edytuj województwa', admin_voivodeships_path %></li>
+              </ul>
+            </li>
+            <li class = "<%= (params[:controller] == 'admin/constituencies' || params[:action] == 'voivodeships_index') ? 'dropdown active' : 'dropdown'  %>">
+              <%= link_to 'Okręgi wyborcze',
+                          admin_constituencies_path,
+                          :class => 'dropdown-toggle',
+                          :data => {
+                                  :toggle => 'dropdown',
+                                  :role => 'button',
+                                  #:aria-expanded => 'false'
+                          }
+              %>
+              <ul class="dropdown-menu" role="menu">
+                <li><%= link_to 'Dodaj okręg', new_admin_constituency_path %></li>
+                <li><%= link_to 'Edytuj okręgi', admin_voivodeships_index_path %></li>
+              </ul>
+            </li>
+            <li class = "<%= params[:controller] == 'admin/committees' ? 'dropdown active' : 'dropdown'  %>">
+              <%= link_to 'Komitety', admin_committees_path,
+                          :class => 'dropdown-toggle',
+                          :data => {
+                                  :toggle => 'dropdown',
+                                  :role => 'button',
+                                  #:aria-expanded => 'false'
+                          } %>
+              <ul class="dropdown-menu" role="menu">
+                <li><%= link_to 'Dodaj komitet', new_admin_committee_path %></li>
+                <li><%= link_to 'Edytuj komitety', admin_committees_path %></li>
+              </ul>
+            </li>
+            <li class = "<%= params[:controller] == 'admin/users' ? 'dropdown active' : 'dropdown'  %>">
+              <%= link_to 'Użytkownicy', users_path,
+                          :class => 'dropdown-toggle',
+                          :data => {
+                                  :toggle => 'dropdown',
+                                  :role => 'button',
+                                  #:aria-expanded => 'false'
+                          } %>
+              <ul class="dropdown-menu" role="menu">
+                <li><%= link_to 'Dodaj użytkownika', new_user_path %></li>
+                <li><%= link_to 'Edytuj użytkowników', users_path %></li>
+              </ul>
+            </li>
+
+        <% elsif current_user && current_user.central? %>
+            <li class ="<%= params[:controller] == 'central/voivodeships' ? 'dropdown active' : 'dropdown'  %>">
+              <%= link_to 'Województwa', central_voivodeships_path,
+                          :class => 'dropdown-toggle',
+                          :data => {
+                                  :toggle => 'dropdown',
+                                  :role => 'button',
+                                  #:aria-expanded => 'false'
+                          } %>
+              <ul class="dropdown-menu" role="menu">
+                <li><%= link_to 'Zobacz województwa', central_voivodeships_path %></li>
+              </ul>
+            </li>
+            <li class = "<%= params[:controller] == 'central/constituencies' ? 'dropdown active' : 'dropdown'  %>">
+              <%= link_to 'Okręgi wyborcze',
+                          constituencies_path,
+                          :class => 'dropdown-toggle',
+                          :data => {
+                                  :toggle => 'dropdown',
+                                  :role => 'button',
+                                  #:aria-expanded => 'false'
+                          }
+              %>
+              <ul class="dropdown-menu" role="menu">
+                <li><%= link_to 'Zobacz okręgi', central_constituencies_path %></li>
+              </ul>
+            </li>
+            <li class = "<%= params[:controller] == 'central/committees' ? 'dropdown active' : 'dropdown'  %>">
+              <%= link_to 'Komitety', central_committees_path,
+                          :class => 'dropdown-toggle',
+                          :data => {
+                                  :toggle => 'dropdown',
+                                  :role => 'button',
+                                  #:aria-expanded => 'false'
+                          } %>
+              <ul class="dropdown-menu" role="menu">
+                <li><%= link_to 'Zobacz komitety', central_committees_path %></li>
+              </ul>
+            </li>
+        <% elsif current_user && current_user.regional? %>
+            <li class = "<%= params[:controller] == 'constituencies' ? 'dropdown active' : 'dropdown'  %>">
+              <%= link_to 'Okręgi wyborcze',
+                          constituencies_path,
+                          :class => 'dropdown-toggle',
+                          :data => {
+                                  :toggle => 'dropdown',
+                                  :role => 'button',
+                                  #:aria-expanded => 'false'
+                          }
+              %>
+              <ul class="dropdown-menu" role="menu">
+                <li><%= link_to 'Zarządzaj okręgiem', constituencies_path %></li>
+              </ul>
+            </li>
+            <li class = "<%= params[:controller] == 'committee' ? 'dropdown active' : 'dropdown'  %>">
+              <%= link_to 'Komitety wyborcze',
+                          committees_path,
+                          :class => 'dropdown-toggle',
+                          :data => {
+                                  :toggle => 'dropdown',
+                                  :role => 'button',
+                                  #:aria-expanded => 'false'
+                          }
+              %>
+              <ul class="dropdown-menu" role="menu">
+                <li><%= link_to 'Zarządzaj głosami', votes_path %></li>
+              </ul>
+            </li>
+
+        <% end %>
+        <li class = "<%= params[:controller] == 'about' ? 'active' : ''  %>">
+          <%= link_to 'O aplikacji', about_path %>
+        </li>
+        <ul class="nav navbar-nav navbar-right">
+          <% if user_signed_in? %>
+              <li><%= link_to "Wyloguj", destroy_user_session_path, :method => :delete %></li>
+          <% else %>
+              <li><%= link_to "Zaloguj się", new_user_session_path %></li>
+          <% end %>
+        </ul>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+<div class = "container">
+  <% if flash[:notice] %>
+      <div class="alert alert-success"><%= flash[:notice] %></div>
+  <% end %>
+
+  <% if flash[:alert] %>
+      <div class="alert alert-danger"><%= flash[:alert] %></div>
+  <% end %>
   <h2></h2>
 
 

@@ -1,5 +1,14 @@
 <%= form_for [:admin, @committee] do |f| %>
     <div class="form-group">
+      <% if @committee.errors.any? %>
+          <% @committee.errors.full_messages.each do |msg| %>
+              <div class ="alert alert-danger">
+                <%= msg %>
+              </div>
+          <% end %>
+      <% end %>
+    </div>
+    <div class="form-group">
       <%= f.label :Nazwa_komitetu %>
       <%= f.text_field :name, class: 'form-control' %>
     </div>

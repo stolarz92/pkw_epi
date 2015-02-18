@@ -9,4 +9,12 @@ class Central::ApplicationController < ActionController::Base
     flash[:error] = "Access denied!"
     redirect_to root_url
   end
+
+  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
+
+  private
+  def record_not_found
+    redirect_to action: :index
+  end
+
 end

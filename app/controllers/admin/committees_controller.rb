@@ -10,9 +10,13 @@ class Admin::CommitteesController < Admin::ApplicationController
 
   def create
     @committee = Committee.new(committee_params)
-    @committee.save
+    if @committee.save
+      flash[:notice] = 'Komitet został zapisany'
+      redirect_to admin_committees_path
+    else
+      render 'new'
+    end
 
-    redirect_to admin_committees_path
   end
 
   def index

@@ -1,6 +1,8 @@
 <h2>Okręgi wyborcze</h2>
 
 <div class = "container">
+<div class = "container">
+  <h2>Podsumowanie</h2>
   <table class = "table">
     <thead>
     <tr>
@@ -16,13 +18,13 @@
     </tr>
     </thead>
     <tbody>
-    <% @constituencies.each do |constituency| %>
+    <% @constituency.each do |constituency| %>
         <tr>
           <td><%= constituency.name %></td>
           <td><%= constituency.voivodeship.name %></td>
           <td><%= constituency.number_of_voters %></td>
           <td><%= constituency.number_of_used_ballots %></td>
-          <td><%= constituency.number_of_mandates  %></td>
+          <td><%= @votes_number  %></td>
           <td><%= constituency.invalid_votes_no_choice %></td>
           <td><%= constituency.invalid_votes_more_choices %></td>
           <td><%= constituency.invalid_votes_other %></td>
@@ -33,7 +35,30 @@
     <% end %>
     </tbody>
     <tfoot>
-
     </tfoot>
   </table>
+  </div>
+
+  <div class="container">
+    <h3>Porównanie liczby wydanych kart z liczbą oddanych głosów</h3>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Wydanych kart</th>
+        <th>Oddanych głosów</th>
+        <th>Bilans</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @constituency.each do |constituency| %>
+          <tr>
+            <td><%= constituency.number_of_used_ballots %></td>
+            <td><%= @votes_number %></td>
+            <td>Oddano o <%= constituency.number_of_used_ballots - @votes_number %> mniej głosów, niż wydano kart do głosowania</td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
 </div>

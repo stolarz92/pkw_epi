@@ -12,9 +12,8 @@ class ConstituenciesController < ApplicationController
   end
 
   def index
-    @constituencies = Constituency.where(
-        :user_id => current_user.id
-    )
+    @constituency = Constituency.where(:user_id => current_user.id).to_a
+    @votes_number = Constituency.count_votes(@constituency)
   end
 
   def show
@@ -29,8 +28,9 @@ class ConstituenciesController < ApplicationController
 
     if @constituency.update(constituency_params)
       flash[:notice] = 'Okręg zaktualizowany'
-
       redirect_to constituencies_path
+    else
+      render 'edit'
     end
   end
 

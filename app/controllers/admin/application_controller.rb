@@ -9,4 +9,12 @@ class Admin::ApplicationController < ActionController::Base
     flash[:error] = "Access denied!"
     redirect_to root_url
   end
+
+  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
+
+  private
+  def record_not_found
+    flash[:alert] = 'Wpis nie istnieje'
+    redirect_to controller: 'admin/voivodeships', action: :index
+  end
 end

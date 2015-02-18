@@ -7,4 +7,12 @@ class ApplicationController < ActionController::Base
     flash[:error] = "Access denied!"
     redirect_to root_url
   end
+
+  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
+
+  private
+  def record_not_found
+    flash[:alert] = 'Ten rekord nie istnieje'
+    redirect_to action: :index
+  end
 end

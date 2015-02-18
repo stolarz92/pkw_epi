@@ -9,9 +9,13 @@ class Admin::VoivodeshipsController < Admin::ApplicationController
 
   def create
     @voivodeship = Voivodeship.new(voivodeship_params)
-    @voivodeship.save
+    if @voivodeship.save
+      flash[:notice] = 'Województwo dodane'
+      redirect_to admin_voivodeships_path
+    else
+      render 'new'
+    end
 
-    redirect_to admin_voivodeships_path
   end
 
   def index
@@ -23,7 +27,13 @@ class Admin::VoivodeshipsController < Admin::ApplicationController
   end
 
   def edit
-    @voivodeship = Voivodeship.set_voivodeship(params)
+    begin
+      @voivodeship = set_voivodeship
+    rescue ActiveRecord::RecordNotFound
+      flash[:notice] = 'Wrong post it'
+      redirect_to :controller => 'admin/voivodeships', :action => 'index'
+      return
+    end
   end
 
   def update
@@ -46,6 +56,10 @@ class Admin::VoivodeshipsController < Admin::ApplicationController
   private
   def voivodeship_params
     params.require(:voivodeship).permit(:name, :places_regional_council)
+  end
+
+  def set_voivodeship
+    Voivodeship.find(params[:id])
   end
 
 end

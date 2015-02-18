@@ -13,22 +13,15 @@
       <%= f.hidden_field :constituency_id,
                          :value => @constituency.id
       %>
-      </div>
+    </div>
     <div class="form-group">
-      <%= collection_select(
-                  :vote,
-                  :committee_id,
-                  @committees,
-                  :id,
-                  :name,
-                  {prompt: 'Wybierz komitet'},
-                  {class: 'form-control'})
+      <%= f.hidden_field :committee_id,
+                         :value => @vote.committee.id
       %>
     </div>
     <div class="form-group">
       <%= f.label :amount, 'Liczba głosów' %>
       <%= f.text_field :number_of_votes, class: 'form-control' %>
     </div>
-        <%= f.submit 'Zapisz', class: 'btn btn-primary' %>
+    <%= f.submit 'Zapisz', class: 'btn btn-primary' %>
 <% end %>
-
