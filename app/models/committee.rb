@@ -25,7 +25,7 @@ class Committee < ActiveRecord::Base
                 :message => "Okręg jest już w bazie"
             }
 
-
+  ### admin ###
   def self.set_committee(params)
     Committee.find_by_id(params[:id])
   end
@@ -36,6 +36,29 @@ class Committee < ActiveRecord::Base
 
   def self.find_committees_for_constituency(current_user)
     current_user.constituency.voivodeship.committees.map
+  end
+
+  ### central ###
+  def self.count_votes_for_committees(committee)
+    sum = 0
+    committee.votes.each do |v|
+      sum += v.number_of_votes
+    end
+    return sum
+  end
+
+  def self.count_all_ballots
+    ballots = 0
+    constituencies = Constituency.all
+    constituencies.each do |constituency|
+      ballots += constituency.number_of_used_ballots if constituency.number_of_used_ballots.present?
+    end
+    return ballots
+  end
+
+  def self.count_result_in_percent(votes, ballots)
+    result = ((votes.to_f/ballots.to_f)*100).round(2)
+    return result
   end
 
 end

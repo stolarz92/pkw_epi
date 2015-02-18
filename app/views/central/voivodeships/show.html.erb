@@ -1,27 +1,51 @@
 <h1><%= @voivodeship.name %></h1>
 
 <div class="container">
-  <table class="table">
-    <thead>
-    <tr>
-      <th>Komitet</th>
-      <th>Liczba zdobytych głosów</th>
-      <th>Procent</th>
-    </tr>
-    </thead>
-    <tbody>
-      <% @voivodeship.committees.map do |committee| %>
-        <tr>
-          <td><%= committee.name %></td>
-          <td>
-            <%= committee.votes.all.map do |comm| %>
-                <% comm.number_of_votes %>
-            <% end.join(", ") %>
+
+  <div class="container">
+    <h3>Wyniki komitetów</h3>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Komitet</th>
+        <th>Liczba zdobytych głosów</th>
+        <th>Poparcie w województwie</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @committees_votes.each do |key, value| %>
+          <tr>
+            <td><%= key %></td>
+            <td><%= value %></td>
+            <td>
+              <% if value.present? %>
+                <%= ((value.to_f/@all_votes_in_voivodeship.to_f) * 100).round(2) %>%
+              <% end %>
             </td>
-          <td></td>
-        </tr>
+          </tr>
       <% end %>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container">
+    <h3>Frekwencja</h3>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Uprawnionych do głosowania</td>
+        <th>Wydanych kart</td>
+        <th>Frekwencja</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><%= @number_of_allowed_voters %></td>
+        <td><%= @ballots %></td>
+        <td><%= @attendance %> %</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 

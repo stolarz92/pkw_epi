@@ -10,13 +10,17 @@ class Central::VoivodeshipsController < Central::ApplicationController
   end
 
   def index
+    @voivodeships = Voivodeship.all
   end
 
   def show
     @voivodeship = Voivodeship.find_by_id(params[:id])
-
-    @voi = @voivodeship.committees.all.inject(0){|s,c| s + c.votes.sum(:number_of_votes) }
-
+    @committees_votes = Voivodeship.count_votes_for_committees(@voivodeship)
+    @number_of_allowed_voters = Voivodeship.count_voters(@voivodeship)
+    @all_votes_in_voivodeship = Voivodeship.count_all_votes(@committees_votes, @voivodeship)
+    @ballots = Voivodeship.count_all_ballots(@voivodeship)
+    @attendance = Voivodeship.count_attendance(@number_of_allowed_voters, @ballots)
+    #@voi = @voivodeship.committees.all.inject(0){|s,c| s + c.votes.sum(:number_of_votes) }
   end
 
   def edit

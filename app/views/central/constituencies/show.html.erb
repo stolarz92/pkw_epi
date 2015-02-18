@@ -1,6 +1,8 @@
-<h2>Okręgi wyborcze</h2>
+<h2>Okręg wyborczy</h2>
 
 <div class = "container">
+  <div class="container">
+    <h2>Dane o okręgu</h2>
   <table class = "table">
     <thead>
     <tr>
@@ -27,6 +29,32 @@
     <tfoot>
     </tfoot>
   </table>
+  </div>
+
+  <div class="container">
+    <h2>Wynik komitetów w okręgu</h2>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Komitet</th>
+        <th>Ilość głosów</th>
+        <th>Procent głosów</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @committees_votes.each do |key, value| %>
+      <tr>
+        <td><%= key %></td>
+        <td><%= value %></td>
+        <td><% if value.present? %>
+              <%= ((value.to_f/@ballots.to_f) * 100).round(2) %>%
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
   <h4>Frekwencja: <%= (@constituency.number_of_used_ballots.to_f/@constituency.number_of_voters.to_f).round(3) * 100 %>%</h4>
 
 </div>

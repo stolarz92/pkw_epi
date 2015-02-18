@@ -1,2 +1,27 @@
-<h1>Committees#show</h1>
-<p>Find me in app/views/committees/show.html.erb</p>
+<div class="container">
+  <h2>Komitety</h2>
+
+  <div class="container">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Komitet</th>
+        <th>Logo</th>
+        <th>Ilość głosów w Polsce</th>
+        <th>Procent głosów w Polsce</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><%= @committee.name %></td>
+        <td><%= link_to image_tag(@committee.image.url(:small)), @committee.image.url  %></td>
+        <td><%= @votes_for_committee %></td>
+        <td><%= @result_in_percent %>%</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+<%= debug(@all_ballots) %>
+<%= debug(@result_in_percent) %>

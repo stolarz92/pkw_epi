@@ -54,4 +54,17 @@ class Constituency < ActiveRecord::Base
     end
   end
 
+  ### central ###
+  def self.count_votes_for_committees(constituency)
+    voivodeship = constituency.voivodeship
+    sum = 0
+    @results = Hash.new
+    voivodeship.committees.each do |committee|
+      voivodeship.votes.where("committee_id = ? AND constituency_id = ?", committee.id, constituency.id).each { |v| sum += v.number_of_votes }
+      @results[committee.name] = sum
+      sum = 0
+    end
+
+    return @results
+  end
 end

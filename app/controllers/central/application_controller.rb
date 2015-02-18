@@ -14,6 +14,7 @@ class Central::ApplicationController < ActionController::Base
 
   private
   def record_not_found
+    flash[:alert] = 'Wpis nie istnieje'
     redirect_to action: :index
   end
 

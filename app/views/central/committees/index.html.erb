@@ -1,2 +1,21 @@
 <h2>Komitety wyborcze</h2>
-
+<div class="container">
+  <div class="container">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Nazwa</th>
+        <th>Akcja</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @committees.each do |committee| %>
+          <tr>
+            <td><%= committee.name %></td>
+            <td><%= link_to 'Szczegóły', central_committee_path(committee), class: 'btn btn-primary' %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

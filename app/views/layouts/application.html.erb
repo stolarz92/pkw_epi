@@ -83,6 +83,18 @@
             </li>
 
         <% elsif current_user && current_user.central? %>
+            <li class = "<%= params[:controller] == 'central/committees' ? 'dropdown active' : 'dropdown'  %>">
+              <%= link_to 'Polska', central_committees_path,
+                          :class => 'dropdown-toggle',
+                          :data => {
+                                  :toggle => 'dropdown',
+                                  :role => 'button',
+                                  #:aria-expanded => 'false'
+                          } %>
+              <ul class="dropdown-menu" role="menu">
+                <li><%= link_to 'Wyniki komitetów', central_committees_path %></li>
+              </ul>
+            </li>
             <li class ="<%= params[:controller] == 'central/voivodeships' ? 'dropdown active' : 'dropdown'  %>">
               <%= link_to 'Województwa', central_voivodeships_path,
                           :class => 'dropdown-toggle',
@@ -109,18 +121,7 @@
                 <li><%= link_to 'Zobacz okręgi', central_constituencies_path %></li>
               </ul>
             </li>
-            <li class = "<%= params[:controller] == 'central/committees' ? 'dropdown active' : 'dropdown'  %>">
-              <%= link_to 'Komitety', central_committees_path,
-                          :class => 'dropdown-toggle',
-                          :data => {
-                                  :toggle => 'dropdown',
-                                  :role => 'button',
-                                  #:aria-expanded => 'false'
-                          } %>
-              <ul class="dropdown-menu" role="menu">
-                <li><%= link_to 'Zobacz komitety', central_committees_path %></li>
-              </ul>
-            </li>
+
         <% elsif current_user && current_user.regional? %>
             <li class = "<%= params[:controller] == 'constituencies' ? 'dropdown active' : 'dropdown'  %>">
               <%= link_to 'Okręgi wyborcze',
