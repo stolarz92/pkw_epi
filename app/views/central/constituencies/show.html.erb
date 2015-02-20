@@ -1,3 +1,4 @@
+
 <h2>Okręg wyborczy</h2>
 
 <div class = "container">
@@ -55,6 +56,6 @@
       </tbody>
     </table>
   </div>
-  <h4>Frekwencja: <%= (@constituency.number_of_used_ballots.to_f/@constituency.number_of_voters.to_f).round(3) * 100 %>%</h4>
-
+  <h4>Frekwencja: <%= ((@constituency.number_of_used_ballots.to_f/@constituency.number_of_voters.to_f).round(3) * 100).abs %>%</h4>
 </div>
+

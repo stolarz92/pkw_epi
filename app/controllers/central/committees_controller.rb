@@ -12,10 +12,11 @@ class Central::CommitteesController < Central::ApplicationController
 
   def index
     @committees = Committee.all
+    @votes_for_committees = Committee.count_votes_for_committees(@committees)
   end
 
   def show
-    @votes_for_committee = Committee.count_votes_for_committees(@committee)
+    @votes_for_committee = Committee.count_votes_for_committee(@committee)
     @all_ballots = Committee.count_all_ballots
     @result_in_percent = Committee.count_result_in_percent(@votes_for_committee, @all_ballots)
   end

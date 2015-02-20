@@ -39,7 +39,18 @@ class Committee < ActiveRecord::Base
   end
 
   ### central ###
-  def self.count_votes_for_committees(committee)
+  def self.count_votes_for_committees(committees)
+    sum = 0
+    @results = Hash.new
+    committees.each do |committee|
+      committee.votes.where("committee_id = ?", committee.id).each { |v| sum += v.number_of_votes }
+      @results[committee.name] = sum
+      sum = 0
+    end
+    return @results
+  end
+
+  def self.count_votes_for_committee(committee)
     sum = 0
     committee.votes.each do |v|
       sum += v.number_of_votes
