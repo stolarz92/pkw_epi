@@ -19,17 +19,13 @@
             <td><%= value %></td>
             <td>
               <% if value.present? %>
-                <%= ((value.to_f/@all_votes_in_voivodeship.to_f) * 100).round(2) %>%
+                  <%= ((value.to_f/@all_votes_in_voivodeship.to_f) * 100).round(2) %>%
               <% end %>
             </td>
           </tr>
       <% end %>
       </tbody>
     </table>
-  </div>
-
-  <div class="container">
-    <%= pie_chart(@committees_votes) %>
   </div>
 
   <div class="container">
@@ -52,12 +48,5 @@
     </table>
   </div>
 
-  <div class="container">
-    <%= pie_chart('Wzięło udział' => @ballots, 'Nie wzięło udziału' => (@number_of_allowed_voters-@ballots)) %>
-  </div>
-
-  <div class="container">
-    <%= link_to 'Generuj raport', {:action => "show", :format => :pdf}, class: 'btn btn-primary' %>
-  </div>
 </div>
 

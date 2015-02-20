@@ -16,6 +16,14 @@ class Central::ConstituenciesController < Central::ApplicationController
     @constituency = Constituency.find_by_id(params[:id])
     @committees_votes = Constituency.count_votes_for_committees(@constituency)
     @ballots = @constituency.number_of_used_ballots
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render :pdf => @constituency.name,
+               :encoding => "UTF-8",
+               :template => 'central/constituencies/show.pdf.erb'
+      end
+    end
   end
 
   def edit

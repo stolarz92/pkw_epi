@@ -1,5 +1,5 @@
 
-<h2>Okręg wyborczy</h2>
+<h2>Okręg wyborczy <%= @constituency.name %></h2>
 
 <div class = "container">
   <div class="container">
@@ -33,7 +33,7 @@
   </div>
 
   <div class="container">
-    <h2>Wynik komitetów w okręgu</h2>
+    <h3>Wynik komitetów w okręgu</h3>
     <table class="table">
       <thead>
       <tr>
@@ -56,40 +56,6 @@
       </tbody>
     </table>
   </div>
-
-  <div class="container">
-    <%= pie_chart(@committees_votes) %>
-  </div>
-
-  <div class="container">
-    <h2>Frekwencja</h2>
-
-    <table class="table">
-      <thead>
-      <tr>
-        <th>Uprawnionych do głosowania</td>
-        <th>Wydanych kart</td>
-        <th>Frekwencja</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td><%= @constituency.number_of_voters %></td>
-        <td><%= @constituency.number_of_used_ballots %></td>
-        <td><%= ((@constituency.number_of_used_ballots.to_f/@constituency.number_of_voters.to_f). * 100).round(2) %> %</td>
-      </tr>
-      </tbody>
-    </table>
-    <%= pie_chart(
-                'Wzięło udział' => @constituency.number_of_used_ballots,
-                'Nie wzięło udziału' => (@constituency.number_of_voters-@constituency.number_of_used_ballots)) %>
-
-  </div>
-
-  <div class="container">
-    <h3>Raport</h3>
-    <%= link_to 'Generuj raport', {:action => "show", :format => :pdf}, class: 'btn btn-primary' %>
-  </div>
-
+  <h4>Frekwencja: <%= ((@constituency.number_of_used_ballots.to_f/@constituency.number_of_voters.to_f) * 100).round(2) %>%</h4>
 </div>
 

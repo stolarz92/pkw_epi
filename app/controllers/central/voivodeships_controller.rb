@@ -21,6 +21,14 @@ class Central::VoivodeshipsController < Central::ApplicationController
     @ballots = Voivodeship.count_all_ballots(@voivodeship)
     @attendance = Voivodeship.count_attendance(@number_of_allowed_voters, @ballots)
     #@voi = @voivodeship.committees.all.inject(0){|s,c| s + c.votes.sum(:number_of_votes) }
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render :pdf => @voivodeship.name,
+               :encoding => "UTF-8",
+               :template => 'central/voivodeships/show.pdf.erb'
+      end
+    end
   end
 
   def edit

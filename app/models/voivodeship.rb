@@ -55,8 +55,8 @@ class Voivodeship < ActiveRecord::Base
   end
 
   def self.count_attendance(voters, ballots)
-    attendance = ballots.to_f / voters.to_f
-    attendance_round = attendance.round(2) * 100
+    attendance = (ballots.to_f / voters.to_f) * 100
+    attendance_round = attendance.round(2)
     return attendance_round
   end
 
