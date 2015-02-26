@@ -18,8 +18,46 @@
       </tbody>
     </table>
   </div>
+
   <div class="container">
     <h2>Wykres kołowy głosów oddanych na komitety w całej Polsce</h2>
-    <%= pie_chart(@votes_for_committees) %>
+    <% if @votes_for_committees.present? %>
+        <%= pie_chart(@votes_for_committees) %>
+    <% else %>
+        <p>Nie ma żadnych głosów</p>
+    <% end %>
+  </div>
+
+  <div class="container">
+    <h3>Frekwencja w Polsce</h3>
+    <% if @attendance.present? %>
+        <%= pie_chart(@attendance) %>
+    <% else %>
+        <p>Nie ma żadnych głosów</p>
+    <% end %>
+  </div>
+
+  <div class="container">
+    <h3>Głosy nieważne w Polsce</h3>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Przyczyna</th>
+        <th>Ilość</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @invalid_votes.each do |key, value| %>
+          <tr>
+            <td><%= key %></td>
+            <td><%= value %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="container">
+    <%= link_to 'Generuj raport', {:action => "index", :format => :pdf}, class: 'btn btn-primary' %>
   </div>
 </div>

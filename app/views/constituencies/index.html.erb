@@ -51,11 +51,13 @@
       </thead>
       <tbody>
       <% @constituency.each do |constituency| %>
+      <% if constituency.number_of_used_ballots.present? && @votes_number.present? %>
           <tr>
             <td><%= constituency.number_of_used_ballots %></td>
             <td><%= @votes_number %></td>
             <td>Oddano o <%= constituency.number_of_used_ballots - @votes_number %> mniej głosów, niż wydano kart do głosowania</td>
           </tr>
+      <% end %>
       <% end %>
       </tbody>
     </table>

@@ -2,6 +2,8 @@
 
 <div class="container">
 
+
+
   <div class="container">
     <h3>Wyniki komitetów</h3>
     <table class="table">
@@ -54,6 +56,26 @@
 
   <div class="container">
     <%= pie_chart('Wzięło udział' => @ballots, 'Nie wzięło udziału' => (@number_of_allowed_voters-@ballots)) %>
+  </div>
+
+  <div class="container">
+    <h3>Głosy nieważne</h3>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Przyczyna</th>
+        <th>Ilość</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @invalid_votes.each do |key, value| %>
+          <tr>
+            <td><%= key %></td>
+            <td><%= value %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
   </div>
 
   <div class="container">

@@ -1,4 +1,8 @@
-<h2>Ilość głosów oddana na komitety w <%= @constituency.name %></h2>
+<% if @constituency.present? %>
+    <h2>Ilość głosów oddana na komitety w <%= @constituency.name %></h2>
+<% else %>
+    <h2>Ilość głosów oddana na komitety</h2>
+<% end %>
 
 <div class = "container">
   <table class = "table">
@@ -10,20 +14,22 @@
       <th>Akcja</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody/>
     <% @votes.each do |vote| %>
-        <tr>
-          <td><%= vote.committee.name %></td>
-          <td><%= link_to image_tag(vote.committee.image.url(:small)), vote.committee.image.url %></td>
-          <td>
-            <%= vote.number_of_votes %>
-          </td>
-          <td>
-            <%= link_to 'Edytuj głosy',
-                        edit_vote_path(:id => vote.id),
-                        class: 'btn btn-primary' %>
-          </td>
-        </tr>
+        <% if vote.committee.present? %>
+            <tr>
+              <td><%= vote.committee.name if vote.committee.name.present? %></td>
+              <td><%= link_to image_tag(vote.committee.image.url(:small)), vote.committee.image.url %></td>
+              <td>
+                <%= vote.number_of_votes %>
+              </td>
+              <td>
+                <%= link_to 'Edytuj głosy',
+                            edit_vote_path(:id => vote.id),
+                            class: 'btn btn-primary' %>
+              </td>
+            </tr>
+        <% end %>
     <% end %>
     </tbody>
     <tfoot>

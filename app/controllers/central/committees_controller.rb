@@ -13,6 +13,17 @@ class Central::CommitteesController < Central::ApplicationController
   def index
     @committees = Committee.all
     @votes_for_committees = Committee.count_votes_for_committees(@committees)
+    @votes_for_committees_pdf = Committee.count_votes_for_committees_pdf(@committees)
+    @invalid_votes = Vote.count_invalid_votes_for_country
+    @attendance = Committee.count_attendance_in_country
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render :pdf => 'Polska',
+               :encoding => "UTF-8",
+               :template => 'central/committees/index.pdf.erb'
+      end
+    end
   end
 
   def show

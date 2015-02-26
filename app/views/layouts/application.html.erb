@@ -92,7 +92,7 @@
                                   #:aria-expanded => 'false'
                           } %>
               <ul class="dropdown-menu" role="menu">
-                <li><%= link_to 'Wyniki komitetów', central_committees_path %></li>
+                <li><%= link_to 'Wyniki', central_committees_path %></li>
               </ul>
             </li>
             <li class ="<%= params[:controller] == 'central/voivodeships' ? 'dropdown active' : 'dropdown'  %>">
@@ -158,7 +158,7 @@
         </li>
         <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>
-              <li><%= link_to "Wyloguj", destroy_user_session_path, :method => :delete %></li>
+              <li><%= link_to "Wyloguj #{current_user.email}", destroy_user_session_path, :method => :delete %></li>
           <% else %>
               <li><%= link_to "Zaloguj się", new_user_session_path %></li>
           <% end %>

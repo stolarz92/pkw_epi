@@ -67,4 +67,6 @@ class Voivodeship < ActiveRecord::Base
     }
     return sum
   end
+
+
 end

@@ -20,6 +20,7 @@ class Central::VoivodeshipsController < Central::ApplicationController
     @all_votes_in_voivodeship = Voivodeship.count_all_votes(@committees_votes, @voivodeship)
     @ballots = Voivodeship.count_all_ballots(@voivodeship)
     @attendance = Voivodeship.count_attendance(@number_of_allowed_voters, @ballots)
+    @invalid_votes = Vote.count_invalid_votes_for_voivodeship(@voivodeship)
     #@voi = @voivodeship.committees.all.inject(0){|s,c| s + c.votes.sum(:number_of_votes) }
     respond_to do |format|
       format.html

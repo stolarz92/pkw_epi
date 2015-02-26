@@ -1,0 +1,62 @@
+
+<div class="container">
+  <h3>Głosy w Polsce</h3>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Komitet</th>
+      <th>Ilość głosow</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @votes_for_committees_pdf.each do |key, value| %>
+        <tr>
+          <td><%= key %></td>
+          <td><%= value %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="container">
+  <h3>Frekwencja</h3>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Przyczyna</th>
+      <th>Ilość</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @attendance.each do |key, value| %>
+        <tr>
+          <td><%= key %></td>
+          <td><%= value %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="container">
+  <h3>Głosy nieważne w Polsce</h3>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Przyczyna</th>
+      <th>Ilość</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @invalid_votes.each do |key, value| %>
+        <tr>
+          <td><%= key %></td>
+          <td><%= value %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+</div>

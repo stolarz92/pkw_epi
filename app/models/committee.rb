@@ -39,6 +39,7 @@ class Committee < ActiveRecord::Base
   end
 
   ### central ###
+
   def self.count_votes_for_committees(committees)
     sum = 0
     @results = Hash.new
@@ -46,6 +47,15 @@ class Committee < ActiveRecord::Base
       committee.votes.where("committee_id = ?", committee.id).each { |v| sum += v.number_of_votes }
       @results[committee.name] = sum
       sum = 0
+    end
+    return @results
+  end
+
+  def self.count_votes_for_committees_pdf(committees)
+    sum = 0
+    @results = Hash.new
+    committees.each do |committee|
+      @results[committee.name] = committee.votes.where("committee_id = ?", committee.id).pluck(:number_of_votes).compact.sum
     end
     return @results
   end
@@ -70,6 +80,13 @@ class Committee < ActiveRecord::Base
   def self.count_result_in_percent(votes, ballots)
     result = ((votes.to_f/ballots.to_f)*100).round(2)
     return result
+  end
+
+  def self.count_attendance_in_country
+    attendance = Hash.new
+    attendance['Wzięło udział'] = Constituency.all.pluck(:number_of_used_ballots).compact.sum
+    attendance['Nie wzięło udziału'] = Constituency.all.pluck(:number_of_voters).compact.sum - attendance['Wzięło udział']
+    return attendance
   end
 
 end

@@ -1,6 +1,20 @@
 class Ability
   include CanCan::Ability
 
+=begin
+  def initialize(user, controller_namespace)
+    case controller_namespace
+      when 'Admin'
+        can :manage, :all if user.admin?
+      when 'Central'
+        can :manage, :all if user.central?
+      else
+        can :manage, :all if user.regional?
+        # rules for non-admin controllers here
+    end
+    end
+=end
+
   def initialize(user)
     # Define abilities for the passed in user here. For example:
     #
@@ -31,7 +45,7 @@ class Ability
     if user.admin?
       can :manage, :all
     elsif user.central?
-      can :manage, :all
+      can :read, :all
     elsif user.regional?
       can :read, Constituency do |constituency|
         constituency.try(:user) == user
@@ -42,7 +56,7 @@ class Ability
       can :update, Constituency do |constituency|
         constituency.try(:user) == user
       end
-      can [:create, :read, :edit, :update], Committee
+      can [:read,], Committee
       can [:create, :read, :edit, :update], Vote
     end
   end

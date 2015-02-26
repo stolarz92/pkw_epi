@@ -59,6 +59,8 @@ Rails.application.routes.draw do
 
   match '/admin/voivodeships_index', to: 'admin/voivodeships#voivodeships_index', via: 'get'
 
+  #get '*path' => redirect('/')
+
   resources :voivodeships, :constituencies, :committees
 
   namespace :admin do
