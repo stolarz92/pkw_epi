@@ -12,9 +12,7 @@ There are three type of users:
    - can set number of voters in particular constituency
    - can assign committees to voivodeships
 
-    login: admin@example.com
-
-    password: admin123
+    login: admin@example.com, password: admin123
 
 * Central member
     - can review election results in particular constituencies
@@ -24,18 +22,14 @@ There are three type of users:
     - can generate pie graph with attendance
     - can generate report with invalid votes
 
-    login: ckw@example.com
-
-    password: ckwckw123
+    login: ckw@example.com, password: ckwckw123
 
 * Local member
     - can add number of votes for particular committees in his constituency
     - can add number of invalid votes
     - can compare number of ballots with number of votes
 
-    login: okw@example.com or okw2@example.com
-
-    password: okwokw123
+    login: okw@example.com or okw2@example.com, password: okwokw123
 
 ## Demo
 Demo is available [here](http://leszczyna.wzks.uj.edu.pl/12_stolarski/pkw/)
