@@ -1,9 +1,7 @@
-== README
-
 # PKW_EPI
 
 ## About project
-App was made for Ruby on Rails class. Main goal is to support election in Poland.=
+App was made for Ruby on Rails class. Main goal is to support election in Poland.
 There are three type of users:
 
 * Admin
@@ -14,8 +12,9 @@ There are three type of users:
    - can set number of voters in particular constituency
    - can assign committees to voivodeships
 
-login: admin@example.com
-password: admin123
+    login: admin@example.com
+
+    password: admin123
 
 * Central member
     - can review election results in particular constituencies
@@ -25,8 +24,9 @@ password: admin123
     - can generate pie graph with attendance
     - can generate report with invalid votes
 
-login: ckw@example.com
-password: ckwckw123
+    login: ckw@example.com
+
+    password: ckwckw123
 
 * Local member
     - can add number of votes for particular committees in his constituency
@@ -34,6 +34,7 @@ password: ckwckw123
     - can compare number of ballots with number of votes
 
     login: okw@example.com or okw2@example.com
+
     password: okwokw123
 
 ## Demo
